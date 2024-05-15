@@ -22,14 +22,17 @@ export const getUser = async (userId: number) => {
 };
 
 export const addUser = async (user: any) => {
-  await db.insert(users).values({
-    clerkId: user?.clerkId,
-    email: user?.email,
-    name: user?.name!,
-    firstName: user?.firstName,
-    lastName: user?.lastName,
-    photo: user?.photo,
-  });
+  await db
+    .insert(users)
+    .values({
+      clerkId: user?.clerkId,
+      email: user?.email,
+      name: user?.name!,
+      firstName: user?.firstName,
+      lastName: user?.lastName,
+      photo: user?.photo,
+    })
+    .returning({ clerkClientId: users?.clerkId });
 
   // revalidatePath("/");
 };
