@@ -21,11 +21,15 @@ export const getUser = async (userId: number) => {
   return user;
 };
 
-export const addUser = async () => {
+export const addUser = async (user: any) => {
   await db.insert(users).values({
-    name: "user1",
-    email: "umair@gmail.com",
+    clerkId: user?.clerkId,
+    email: user?.email,
+    name: user?.name!,
+    firstName: user?.firstName,
+    lastName: user?.lastName,
+    photo: user?.photo,
   });
 
-  revalidatePath("/");
+  // revalidatePath("/");
 };
